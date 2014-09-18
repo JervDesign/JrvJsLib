@@ -1,13 +1,19 @@
 /**
  * JrvStateTrack
- * @type Object
+ * @type {object}
  */
 JrvStateTrack = {
     /**
-     * state[statename[id]]
+     * state - state[statename[id]]
      * @type Array
      */
     state: [],
+    /**
+     * startState
+     * @param {string} statename
+     * @param {string} id
+     * @returns {undefined}
+     */
     startState: function (statename, id) {
 
         if (!statename || !id) {
@@ -43,6 +49,12 @@ JrvStateTrack = {
 
         }
     },
+    /**
+     * endState
+     * @param {string} statename
+     * @param {string} id
+     * @returns {undefined}
+     */
     endState: function (statename, id) {
 
         if (!statename || !id) {
@@ -78,9 +90,9 @@ JrvStateTrack = {
         }
     },
     /**
-     *
-     * @param statename
-     * @param id
+     * isState
+     * @param {string} statename
+     * @param {string} id
      * @returns {boolean}
      */
     isState: function (statename, id) {
@@ -108,4 +120,3 @@ JrvStateTrack = {
         return (JrvStateTrack.state[statename].length > 0)
     }
 }
-,

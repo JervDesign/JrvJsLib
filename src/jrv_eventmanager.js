@@ -5,11 +5,11 @@
 JrvEventmanager = {
     /**
      * events
-     * @type object
+     * @type {object}
      */
     events: {},
     /**
-     * 
+     * on
      * @param {string} eventname
      * @param {function} method
      * @returns {undefined}
@@ -23,7 +23,7 @@ JrvEventmanager = {
         this.events[eventname].push(method);
     },
     /**
-     * 
+     * trigger
      * @param {string} eventname
      * @param {object} args
      * @returns {undefined}
@@ -39,7 +39,7 @@ JrvEventmanager = {
         }
     },
     /**
-     * 
+     * hasEvents
      * @param {string} eventname
      * @returns {Boolean}
      */
