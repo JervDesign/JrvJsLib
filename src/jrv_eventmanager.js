@@ -3,25 +3,43 @@
  * @type object
  */
 JrvEventmanager = {
+    
+    /**
+     * event
+     * @type {class}
+     * @param {string} id
+     * @param {function} action
+     * @param {int} priority
+     * @returns {undefined}
+     */
+    eventAction: function(id, action, priority){
+        var self = this;
+        self.id = id;
+        self.action = action;
+        self.priority = priority;
+    },
+    
     /**
      * events
      * @type {object}
      */
     events: {},
+    
     /**
      * on
      * @param {string} eventname
      * @param {function} method
      * @returns {undefined}
      */
-    on: function (eventname, method) {
+    on: function (eventname, eventAction) {
 
-        if (!this.events[eventname]) {
-            this.events[eventname] = [];
+        if (!JrvEventmanager.events[eventname]) {
+            JrvEventmanager.events[eventname] = {};
         }
 
-        this.events[eventname].push(method);
+        JrvEventmanager.events[eventname][eventAction.id]= eventAction;
     },
+    
     /**
      * trigger
      * @param {string} eventname
@@ -30,14 +48,25 @@ JrvEventmanager = {
      */
     trigger: function (eventname, args) {
         
-        if (this.events[eventname]) {
+        if (JrvEventmanager.events[eventname]) {
             
-            var event = this.events[eventname]
+            var event = JrvEventmanager.events[eventname]
+            // @todo Implement priority
             for (var prop in event) {
-                event[prop](args)
+                event[prop].action(args)
             }
         }
     },
+    
+    remove: function (eventname, eventActionId) {
+        
+        if (!JrvEventmanager.events[eventname]) {
+            return;
+        }
+
+        delete JrvEventmanager.events[eventname][eventActionId];
+    },
+    
     /**
      * hasEvents
      * @param {string} eventname
@@ -45,14 +74,14 @@ JrvEventmanager = {
      */
     hasEvents: function (eventname) {
 
-        if (!this.events[eventname]) {
+        if (!JrvEventmanager.events[eventname]) {
             return false;
         }
 
-        if (this.events[eventname].length > 0) {
-            return true;
+        if (Object.getOwnPropertyNames(JrvEventmanager.events[eventname]).length === 0) {
+            return false;
         }
 
-        return false;
+        return true;
     }
 }
