@@ -20,6 +20,7 @@ JrvStateTrack = {
             // console.warn('State requires unique statename and id to track state'.);
             return;
         }
+        
         if (!JrvStateTrack.state[statename]) {
 
             JrvStateTrack.state[statename] = [];
@@ -27,7 +28,7 @@ JrvStateTrack = {
 
         var firstState = false;
 
-        if (JrvStateTrack.state[statename].length == 0) {
+        if (JrvStateTrack.state[statename].length === 0) {
 
             firstState = true;
         }
